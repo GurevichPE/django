@@ -12,11 +12,19 @@ class BookList(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = Book.objects.all()
         pages = self.request.query_params.get('pages_amount', None)
-        pages = int(pages)
+        if pages != None:
+            pages = int(pages)
+            for book in queryset:
+                if int(book.pages) > pages:
+                    print(str(book.name))
 
-        for book in queryset:
-            if int(book.pages) > pages:
-                print(str(book.name))
+        fio = self.request.query_params.get('fio', None)
+        if fio != None:
+            for book in queryset:
+                if book.author == fio:
+                    print(str(book.name))
+
+
     serializer_class = BookSerializer
 
 
