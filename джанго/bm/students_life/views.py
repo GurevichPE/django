@@ -9,7 +9,14 @@ from students_life.serializers import BookSerializer, LibrarySerializer, BookInL
 
 
 class BookList(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        pages = self.request.query_params.get('pages_amount', None)
+        pages = int(pages)
+
+        for book in queryset:
+            if int(book.pages) > pages:
+                print(str(book.name))
     serializer_class = BookSerializer
 
 
