@@ -70,7 +70,6 @@ class BookInLibList(generics.ListCreateAPIView):
         exact = Book.objects.filter(
             name__contains=bookname).first()
 
-       # exact = BookInLib.objects.all()
         try:
             for boook in queryset:
                 if boook.book.name == book_name.name:
