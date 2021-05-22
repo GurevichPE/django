@@ -78,7 +78,7 @@ class BookInLibList(generics.ListCreateAPIView):
         except AttributeError:
             pass
 
-        if type(exact) != None:
+        if exact != None:
             for boook in queryset:
                 if boook.book.name == exact.name:
                     print('book ' + str(book_name) + str(boook.id) + ' from ' + str(boook.lib) +
